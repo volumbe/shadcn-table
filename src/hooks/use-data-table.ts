@@ -69,6 +69,7 @@ export function useDataTable<TData>(props: UseDataTableProps<TData>) {
     columns,
     pageCount = -1,
     initialState,
+    rowCount = -1,
     history = "replace",
     debounceMs = DEBOUNCE_MS,
     throttleMs = THROTTLE_MS,
@@ -131,15 +132,16 @@ export function useDataTable<TData>(props: UseDataTableProps<TData>) {
     (updaterOrValue: Updater<PaginationState>) => {
       if (typeof updaterOrValue === "function") {
         const newPagination = updaterOrValue(pagination);
-        void setPage(newPagination.pageIndex + 1);
+        void setPage(Math.min(newPagination.pageIndex + 1, pageCount));
         void setPerPage(newPagination.pageSize);
       } else {
-        void setPage(updaterOrValue.pageIndex + 1);
+        void setPage(Math.min(updaterOrValue.pageIndex + 1, pageCount));
         void setPerPage(updaterOrValue.pageSize);
       }
     },
-    [pagination, setPage, setPerPage],
+    [pagination, setPage, setPerPage, pageCount],
   );
+
 
   const columnIds = React.useMemo(() => {
     return new Set(
@@ -194,6 +196,7 @@ export function useDataTable<TData>(props: UseDataTableProps<TData>) {
 
   const debouncedSetFilterValues = useDebouncedCallback(
     (values: typeof filterValues) => {
+      console.log(values);
       void setPage(1);
       void setFilterValues(values);
     },
@@ -263,6 +266,7 @@ export function useDataTable<TData>(props: UseDataTableProps<TData>) {
     columns,
     initialState,
     pageCount,
+    rowCount,
     state: {
       pagination,
       sorting,

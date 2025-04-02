@@ -1,0 +1,361 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {},
+  "enums": {
+    "public.alert_type": {
+      "name": "alert_type",
+      "values": [
+        "critical",
+        "warning",
+        "info"
+      ],
+      "schema": "public"
+    },
+    "public.applicant_status": {
+      "name": "applicant_status",
+      "values": [
+        "applied",
+        "joined",
+        "rejected",
+        "accepted"
+      ],
+      "schema": "public"
+    },
+    "public.compliance_issue_type": {
+      "name": "compliance_issue_type",
+      "values": [
+        "text",
+        "image",
+        "link"
+      ],
+      "schema": "public"
+    },
+    "public.content_type": {
+      "name": "content_type",
+      "values": [
+        "blog",
+        "video",
+        "email",
+        "youtube",
+        "instagram",
+        "linkedin",
+        "tiktok",
+        "website",
+        "podcast"
+      ],
+      "schema": "public"
+    },
+    "public.crawl_param_field": {
+      "name": "crawl_param_field",
+      "values": [
+        "excludePaths",
+        "includePaths"
+      ],
+      "schema": "public"
+    },
+    "public.diff_type": {
+      "name": "diff_type",
+      "values": [
+        "added",
+        "removed"
+      ],
+      "schema": "public"
+    },
+    "public.document_type": {
+      "name": "document_type",
+      "values": [
+        "guidelines",
+        "product-info"
+      ],
+      "schema": "public"
+    },
+    "public.info_type": {
+      "name": "info_type",
+      "values": [
+        "short",
+        "long"
+      ],
+      "schema": "public"
+    },
+    "public.issue_status": {
+      "name": "issue_status",
+      "values": [
+        "todo",
+        "in_progress",
+        "done",
+        "resolved",
+        "archived",
+        "in_review",
+        "backlog",
+        "canceled",
+        "in_remediation",
+        "exception",
+        "invalid"
+      ],
+      "schema": "public"
+    },
+    "public.notification_digest": {
+      "name": "notification_digest",
+      "values": [
+        "daily",
+        "weekly",
+        "monthly"
+      ],
+      "schema": "public"
+    },
+    "public.organization_type": {
+      "name": "organization_type",
+      "values": [
+        "affiliate",
+        "brand",
+        "agency"
+      ],
+      "schema": "public"
+    },
+    "public.priority": {
+      "name": "priority",
+      "values": [
+        "low",
+        "medium",
+        "high",
+        "urgent",
+        "none"
+      ],
+      "schema": "public"
+    },
+    "public.risk_format": {
+      "name": "risk_format",
+      "values": [
+        "numeric",
+        "categorical"
+      ],
+      "schema": "public"
+    },
+    "public.rule_scope": {
+      "name": "rule_scope",
+      "values": [
+        "brand",
+        "affiliate"
+      ],
+      "schema": "public"
+    },
+    "public.scan_interval": {
+      "name": "scan_interval",
+      "values": [
+        "daily",
+        "weekly",
+        "monthly"
+      ],
+      "schema": "public"
+    },
+    "public.scan_status": {
+      "name": "scan_status",
+      "values": [
+        "waiting",
+        "active",
+        "complete",
+        "error",
+        "review"
+      ],
+      "schema": "public"
+    },
+    "public.scrape_action": {
+      "name": "scrape_action",
+      "values": [
+        "wait",
+        "click",
+        "write",
+        "press",
+        "scroll",
+        "exclude"
+      ],
+      "schema": "public"
+    },
+    "public.snapshot_type": {
+      "name": "snapshot_type",
+      "values": [
+        "website",
+        "video",
+        "audio"
+      ],
+      "schema": "public"
+    },
+    "public.user_role": {
+      "name": "user_role",
+      "values": [
+        "partner",
+        "manager",
+        "admin",
+        "affiliate"
+      ],
+      "schema": "public"
+    }
+  },
+  "schemas": {},
+  "sequences": {
+    "public.affiliate_scrape_actions_id_seq": {
+      "name": "affiliate_scrape_actions_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.affiliates_id_seq": {
+      "name": "affiliates_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.content_snapshots_id_seq": {
+      "name": "content_snapshots_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.content_to_snapshot_id_seq": {
+      "name": "content_to_snapshot_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.contents_id_seq": {
+      "name": "contents_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.documents_id_seq": {
+      "name": "documents_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.issue_activity_logs_id_seq": {
+      "name": "issue_activity_logs_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.product_details_id_seq": {
+      "name": "product_details_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.products_id_seq": {
+      "name": "products_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.comments_id_seq": {
+      "name": "comments_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "9223372036854775807",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.users__id_seq": {
+      "name": "users__id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "9223372036854775807",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.compliance_settings_id_seq": {
+      "name": "compliance_settings_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "9223372036854775807",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.compliance_scans_id_seq": {
+      "name": "compliance_scans_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.brand_risk_scorecard_items_id_seq": {
+      "name": "brand_risk_scorecard_items_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "9223372036854775807",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    },
+    "public.affiliate_link_snapshots_id_seq": {
+      "name": "affiliate_link_snapshots_id_seq",
+      "schema": "public",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "2147483647",
+      "increment": "1",
+      "cycle": false,
+      "cache": "1"
+    }
+  },
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {}
+  }
+}

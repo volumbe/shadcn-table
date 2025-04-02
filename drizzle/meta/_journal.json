@@ -1,5 +1,13 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1743579958254,
+      "tag": "0000_romantic_swordsman",
+      "breakpoints": true
+    }
+  ]
 }

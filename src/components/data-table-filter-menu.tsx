@@ -116,7 +116,10 @@ export function DataTableFilterMenu<TData>({
         throttleMs,
       }),
   );
-  const debouncedSetFilters = useDebouncedCallback(setFilters, debounceMs);
+  const debouncedSetFilters = useDebouncedCallback((props: Parameters<typeof setFilters>[0]) => {
+    void table.setPageIndex(0);
+    setFilters(props);
+  }, debounceMs);
 
   const onFilterAdd = React.useCallback(
     (column: Column<TData>, value: string) => {
