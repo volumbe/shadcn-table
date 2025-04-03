@@ -20,6 +20,7 @@ export default async function IndexPage(props: IndexPageProps) {
   const searchParams = await props.searchParams;
   const search = issuesSearchParamsCache.parse(searchParams);
     
+  console.log(search);
   const validFilters = getValidFilters(search.filters);
 
   const promises = Promise.all([  
@@ -34,7 +35,7 @@ export default async function IndexPage(props: IndexPageProps) {
   ]);
 
   return (
-    <Shell className="gap-2">
+    <Shell>
       <FeatureFlagsProvider>
         <React.Suspense
           fallback={

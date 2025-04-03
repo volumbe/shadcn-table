@@ -11,12 +11,17 @@ import * as z from "zod";
 import { flagConfig } from "@/config/flag";
 import { getFiltersStateParser, getSortingStateParser } from "@/lib/parsers";
 
+export const searchParamsParsers = {
+  brandId: parseAsString.withDefault(""),
+}
+
 export const searchParamsCache = createSearchParamsCache({
+  ...searchParamsParsers,
   filterFlag: parseAsStringEnum(
     flagConfig.featureFlags.map((flag) => flag.value),
   ),
   page: parseAsInteger.withDefault(1),
-  perPage: parseAsInteger.withDefault(10),
+  perPage: parseAsInteger.withDefault(50),
   sort: getSortingStateParser<Task>().withDefault([
     { id: "createdAt", desc: true },
   ]),
@@ -30,6 +35,10 @@ export const searchParamsCache = createSearchParamsCache({
   // advanced filter
   filters: getFiltersStateParser().withDefault([]),
   joinOperator: parseAsStringEnum(["and", "or"]).withDefault("and"),
+}, {
+  urlKeys: {
+    brandId: "brand",
+  }
 });
 
 export const createTaskSchema = z.object({
@@ -53,11 +62,12 @@ export type GetTasksSchema = Awaited<
 >;
 
 export const productsSearchParamsCache = createSearchParamsCache({
+  ...searchParamsParsers,
   filterFlag: parseAsStringEnum(
     flagConfig.featureFlags.map((flag) => flag.value),
   ),
   page: parseAsInteger.withDefault(1),
-  perPage: parseAsInteger.withDefault(10),
+  perPage: parseAsInteger.withDefault(50),
   sort: getSortingStateParser<Product & { brandName: string }>().withDefault([
     { id: "createdAt", desc: true },
   ]),
@@ -75,11 +85,12 @@ export type GetProductsSchema = Awaited<
 >;
 
 export const issuesSearchParamsCache = createSearchParamsCache({
+  ...searchParamsParsers,
   filterFlag: parseAsStringEnum(
     flagConfig.featureFlags.map((flag) => flag.value),
   ),
   page: parseAsInteger.withDefault(1),
-  perPage: parseAsInteger.withDefault(10),
+  perPage: parseAsInteger.withDefault(50),
   sort: getSortingStateParser<ComplianceIssue & { brandName: string }>().withDefault([
     { id: "createdAt", desc: true },
   ]),
@@ -92,6 +103,10 @@ export const issuesSearchParamsCache = createSearchParamsCache({
   // advanced filter
   filters: getFiltersStateParser().withDefault([]),
   joinOperator: parseAsStringEnum(["and", "or"]).withDefault("and"),
+}, {
+  urlKeys: {
+    brandId: "brand",
+  }
 });
 
 export type GetIssuesSchema = Awaited<

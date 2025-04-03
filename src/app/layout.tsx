@@ -1,4 +1,18 @@
-import { SiteHeader } from "@/components/layouts/site-header";
+import { AppSidebar } from "@/components/app-sidebar"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/providers";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { siteConfig } from "@/config/site";
@@ -86,10 +100,36 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col">
-            <SiteHeader />
-            <main className="relative flex-1 overflow-hidden h-svh">{children}</main>
-          </div>
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+              <div className="flex h-screen flex-col overflow-hidden">
+                <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+                  <div className="flex items-center gap-2 px-4">
+                    <SidebarTrigger className="-ml-1" />
+                    <Separator
+                      orientation="vertical"
+                      className="mr-2 data-[orientation=vertical]:h-4"
+                    />
+                    <Breadcrumb>
+                      <BreadcrumbList>
+                        <BreadcrumbItem className="hidden md:block">
+                          <BreadcrumbLink href="#">
+                            Building Your Application
+                          </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator className="hidden md:block" />
+                        <BreadcrumbItem>
+                          <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                        </BreadcrumbItem>
+                      </BreadcrumbList>
+                    </Breadcrumb>
+                  </div>
+                </header>
+                <main className="relative flex-1 overflow-y-auto">{children}</main>
+              </div>
+            </SidebarInset>
+          </SidebarProvider>
           <TailwindIndicator />
         </ThemeProvider>
         <Toaster />

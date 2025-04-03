@@ -7,6 +7,7 @@ import {
   asc,
   count,
   desc,
+  eq,
   gt,
   gte,
   ilike,
@@ -271,9 +272,11 @@ export async function getIssues(input: GetIssuesSchema) {
       joinOperator: input.joinOperator,
     });
 
+    console.log(input.brandId);
     const where = advancedTable
       ? advancedWhere
       : and(
+        input.brandId ? eq(complianceIssues.brandId, input.brandId) : undefined,
         input.status.length > 0
               ? inArray(tasks.status, input.status)
               : undefined,
