@@ -607,7 +607,7 @@ export const contentToBrand = pgTable("content_to_brand", {
 	contentId: integer("content_id").notNull(),
 	brandId: varchar("brand_id", { length: 256 }).notNull(),
 	monetized: boolean(),
-	riskScore: numeric("risk_score"),
+	riskScore: numeric("risk_score"), 
 	scannedAt: timestamp("scanned_at", { withTimezone: true }),
 	createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 	latestScanId: integer("latest_scan_id"),

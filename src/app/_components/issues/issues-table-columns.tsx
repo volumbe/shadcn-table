@@ -30,6 +30,7 @@ import { getErrorMessage } from "@/lib/handle-error";
 import { updateTask } from "../../_lib/actions";
 import { getPriorityIcon, getStatusIcon } from "../../_lib/utils";
 import { GetIssues } from "../../_lib/queries";
+import Link from "next/link";
 interface GetIssuesTableColumnsProps {
   statusCounts: Record<ComplianceIssue["status"], number>;
   setRowAction: React.Dispatch<React.SetStateAction<DataTableRowAction<GetIssues> | null>>;
@@ -79,6 +80,24 @@ export function getIssuesTableColumns({ statusCounts, setRowAction }: GetIssuesT
         icon: Text,
       },
       enableColumnFilter: true,
+    },
+    {
+      id: "traceUrl",
+      accessorKey: "traceUrl",
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Trace URL" />,
+      cell: ({ row }) => {
+        const traceUrl = row.original.traceUrl;
+
+        return (
+          <div className="flex items-center gap-2">
+            <Link target="_blank" href={traceUrl ?? ""} className="max-w-[8rem] truncate font-medium">{traceUrl}</Link>
+          </div>
+        );
+      },
+      meta: {
+        label: "Trace URL",
+      },
+      enableColumnFilter: false,
     },
     {
       id: "isValid",
@@ -209,12 +228,12 @@ export function getIssuesTableColumns({ statusCounts, setRowAction }: GetIssuesT
       enableColumnFilter: true,
     },
     {
-      id: "updatedAt",
-      accessorKey: "updatedAt",
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Updated At" />,
-      cell: ({ row }) => formatDate(row.original.updatedAt),
+      id: "createdAt",
+      accessorKey: "createdAt",
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Detected" />,
+      cell: ({ row }) => formatDate(row.original.createdAt),
       meta: {
-        label: "Updated At",
+        label: "Detected",
         variant: "dateRange",
         icon: CalendarIcon,
       },
