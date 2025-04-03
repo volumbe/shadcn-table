@@ -278,7 +278,7 @@ export async function getIssues(input: GetIssuesSchema) {
       : and(
         input.brandId ? eq(complianceIssues.brandId, input.brandId) : undefined,
         input.status.length > 0
-              ? inArray(tasks.status, input.status)
+          ? inArray(complianceIssues.status, input.status)
               : undefined,
         input.priority.length > 0
           ? inArray(complianceIssues.priority, input.priority)
@@ -445,6 +445,20 @@ export async function getIssues(input: GetIssuesSchema) {
 
 
 export async function getIssueStatusCounts(input: GetIssuesSchema) {
+  const defaultIssueStatusCounts: Record<ComplianceIssue["status"], number> = {
+    todo: 0,
+    'in_progress': 0,
+    'in_review': 0,
+    'in_remediation': 0,
+    resolved: 0,
+    done: 0,
+    invalid: 0,
+    exception: 0,
+    backlog: 0,
+    archived: 0,
+    canceled: 0,
+  }
+
   try {
     const advancedTable =
       input.filterFlag === "advancedFilters" ||
@@ -459,6 +473,13 @@ export async function getIssueStatusCounts(input: GetIssuesSchema) {
     const where = advancedTable
       ? advancedWhere
       : and(
+        input.status.length > 0
+          ? inArray(complianceIssues.status, input.status)
+          : undefined,
+        input.priority.length > 0
+          ? inArray(complianceIssues.priority, input.priority)
+          : undefined,
+        input.brandId ? eq(complianceIssues.brandId, input.brandId) : undefined,
         input.issueNumber ? ilike(complianceIssues.issueNumber, `%${input.issueNumber}%`) : undefined,
         input.updatedAt.length > 0
           ? and(
@@ -499,6 +520,7 @@ export async function getIssueStatusCounts(input: GetIssuesSchema) {
         )
         : [asc(complianceIssues.updatedAt)];
 
+
     return await db
       .select({
         status: complianceIssues.status,
@@ -513,36 +535,12 @@ export async function getIssueStatusCounts(input: GetIssuesSchema) {
           (acc, { status, count }) => {
             acc[status] = count;
             return acc;
-          }, {
-            todo: 0,
-            'in_progress': 0,
-            'in_review': 0,
-            'in_remediation': 0,
-            resolved: 0,
-            invalid: 0,
-            exception: 0,
-            backlog: 0,
-            archived: 0,
-            canceled: 0,
-            done: 0,
-          } as Record<ComplianceIssue["status"], number>,
+          }, defaultIssueStatusCounts,
         ),
       );
   } catch (_err) {
     console.error(_err);
-    return {
-      todo: 0,
-      'in_progress': 0,
-      'in_review': 0,
-      'in_remediation': 0,
-      resolved: 0,
-      invalid: 0,
-      exception: 0,
-      backlog: 0,
-      archived: 0,
-      canceled: 0,
-      done: 0,
-    } as Record<ComplianceIssue["status"], number>;
+    return defaultIssueStatusCounts;
   }
 }
 

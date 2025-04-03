@@ -192,7 +192,9 @@ export function useDataTable<TData>(props: UseDataTableProps<TData>) {
     }, {});
   }, [filterableColumns, queryStateOptions, enableAdvancedFilter]);
 
-  const [filterValues, setFilterValues] = useQueryStates(filterParsers);
+  const [filterValues, setFilterValues] = useQueryStates(filterParsers, {
+    shallow: false,
+  });
 
   const debouncedSetFilterValues = useDebouncedCallback(
     (values: typeof filterValues) => {

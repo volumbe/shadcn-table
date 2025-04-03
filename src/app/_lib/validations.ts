@@ -1,4 +1,4 @@
-import { ComplianceIssue, Product, type Task, tasks } from "@/db/schema";
+import { ComplianceIssue, complianceIssues, Product, type Task, tasks } from "@/db/schema";
 import {
   createSearchParamsCache,
   parseAsArrayOf,
@@ -95,8 +95,8 @@ export const issuesSearchParamsCache = createSearchParamsCache({
     { id: "createdAt", desc: true },
   ]),
   issueNumber: parseAsString.withDefault(""),
-  status: parseAsArrayOf(z.enum(tasks.status.enumValues)).withDefault([]),
-  priority: parseAsArrayOf(z.enum(tasks.priority.enumValues)).withDefault([]),
+  status: parseAsArrayOf(z.enum(complianceIssues.status.enumValues)).withDefault([]),
+  priority: parseAsArrayOf(z.enum(complianceIssues.priority.enumValues)).withDefault([]),
   estimatedHours: parseAsArrayOf(z.coerce.number()).withDefault([]),
   createdAt: parseAsArrayOf(z.coerce.number()).withDefault([]),
   updatedAt: parseAsArrayOf(z.coerce.number()).withDefault([]),

@@ -75,8 +75,6 @@ export function getIssuesTableColumns({ statusCounts, setRowAction }: GetIssuesT
       },
       meta: {
         label: "Issue ID",
-        placeholder: "Search issues...",
-        variant: "text",
         icon: Text,
       },
       enableColumnFilter: true,
@@ -176,9 +174,6 @@ export function getIssuesTableColumns({ statusCounts, setRowAction }: GetIssuesT
       },
       meta: {
         label: "Explanation",
-        placeholder: "Search explanation...",
-        variant: "text",
-        icon: Text,
       },
       enableColumnFilter: true,
     },
